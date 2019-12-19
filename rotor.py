@@ -1,3 +1,4 @@
+import os
 import sys
 import math
 import numpy as np
@@ -12,7 +13,13 @@ import scipy.interpolate
 # alpha_rad	- The effective angle of attack the airfoil experiences
 # alpha_rad + phi = theta
 
+print('Rotor Blade Element Analysis\nMcCloud Aero Corp.')
+
 pi = math.pi
+
+# Get dir where script lives
+script_path = os.path.dirname(os.path.abspath(__file__))
+airfoils_path = os.path.join(script_path,'airfoils')
 
 # Read inputs file
 exec(open('rotor.inputs').read())
@@ -43,7 +50,8 @@ else:
 
 # Read airfoil data
 if airfoil_type == 'single':
-  airfoil = np.loadtxt('./airfoils/'+airfoil_name+'.dat',skiprows=1,delimiter=',')
+  airfoil_path = os.path.join(airfoils_path,airfoil_name+'.dat')
+  airfoil = np.loadtxt(airfoil_path,skiprows=1,delimiter=',')
   # Create splines
   mach_data = airfoil[:,0]
   alpha_data = airfoil[:,1]
@@ -65,7 +73,8 @@ if airfoil_type == 'single':
     cm_spline = scipy.interpolate.bisplrep(mach_data,alpha_data,cm_data)
 else:
   # Tip
-  airfoil = np.loadtxt('./airfoils/'+tip_airfoil_name+'.dat',skiprows=1,delimiter=',')
+  airfoil_path = os.path.join(airfoils_path,tip_airfoil_name+'.dat')
+  airfoil = np.loadtxt(airfoil_path,skiprows=1,delimiter=',')
   # Create splines
   mach_data = airfoil[:,0]
   alpha_data = airfoil[:,1]
@@ -87,7 +96,8 @@ else:
     tip_cm_spline = scipy.interpolate.bisplrep(mach_data,alpha_data,cm_data)
 
   # Root 
-  airfoil = np.loadtxt('./airfoils/'+root_airfoil_name+'.dat',skiprows=1,delimiter=',')
+  airfoil_path = os.path.join(airfoils_path,root_airfoil_name+'.dat')
+  airfoil = np.loadtxt(airfoil_path,skiprows=1,delimiter=',')
   # Create splines
   mach_data = airfoil[:,0]
   alpha_data = airfoil[:,1]

@@ -15,7 +15,7 @@ import scipy.interpolate
 pi = math.pi
 
 # Read inputs file
-exec(open('inputs.txt').read())
+exec(open('rotor.inputs').read())
 
 # Determine airfoil method
 try:
@@ -132,7 +132,7 @@ torque = []
 # Initialize total_output file
 total_output = open('./output.txt','w')
 # Print Data Header
-total_output.write(' RPM\tT(N)\tP(kW)\tM(N-m)\\(kg-cm)\t\tT(lbf)\tP(Hp)\tM(ft-lb)\t\tFM\tM_tip\tv_induced\n')
+total_output.write(' RPM,  T(N),    P(kW),M(N-m), M(kg-cm), T(lbf), P(Hp),M(ft-lb),FM,    M_tip, v_induced\n')
   
 # Initialize total_output file
 radial_output = open('./radial_output.txt','w')
@@ -294,7 +294,7 @@ for RPM in RPMs:
  
   FM = P_ideal/P
   M_tip = v_mag/a
-  total_output.write('{:5d}\t{:5.2f}\t{:5.2f}\t{:6.3f}\\{:6.3f}\t\t{:5.2f}\t{:5.2f}\t{:6.3f}\t\t{:5.3f}\t{:5.3f}\t{:5.3f}\n'.format(RPM,T,P,M,M_kg,T_imp,P_imp,M_imp,FM,M_tip,v_ideal))
+  total_output.write('{:5d}, {:5.2f}, {:5.2f}, {:6.3f}, {:6.4f}, {:5.2f}, {:5.2f}, {:6.4f}, {:5.3f}, {:5.3f}, {:5.3f}\n'.format(RPM,T,P,M,M_kg,T_imp,P_imp,M_imp,FM,M_tip,v_ideal))
 
 # Close total_output
 total_output.close()

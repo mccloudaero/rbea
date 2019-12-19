@@ -130,15 +130,6 @@ r_inc = (tip_radius-root_radius)/(num_elements-1)
 theta_inc = (tip_theta-root_theta)/(num_elements-1)
 chord_inc = (tip_chord-root_chord)/(num_elements-1)
 
-# Initialize lists
-radius = []
-theta = []
-theta_rad = []
-alpha_rad = []
-chord = []
-thrust = []
-drag =[]
-torque = []
 
 # Initialize total_output file
 total_output = open('./output.txt','w')
@@ -153,14 +144,6 @@ for i in range(num_elements):
   radial_output.write(str(i)+'\t')
 radial_output.write('\n')
 
-# Populate radii and theta lists
-for i in range(num_elements):
-  radius.append(root_radius+i*r_inc)
-  chord.append(root_chord+chord_inc)
-  theta.append(root_theta+i*theta_inc)
-  theta_rad.append(theta[i]/180*pi)
-  alpha_rad.append(0)
-
 # Specified Theta
 #theta = [18.00, 17.34, 16.68, 16.03, 15.37, 14.71, 14.05, 13.39, 12.74, 12.08, 11.42, 10.76, 10.10, 9.44, 8.79, 8.13, 7.47, 6.82, 6.16, 5.50]
 #for i in range(num_elements):
@@ -174,6 +157,21 @@ for RPM in RPMs:
     n = RPM/60               # RPS
     omega = n*2*pi           # angular velocity
     V_tip = omega*tip_radius # tip velocity
+
+    # Populate radii and theta lists
+    # Theta changes based on pitch
+    # Initialize lists
+    radius = []
+    chord = []
+    theta = []
+    theta_rad = []
+    alpha_rad = []
+    for i in range(num_elements):
+      radius.append(root_radius+i*r_inc)
+      chord.append(root_chord+chord_inc)
+      theta.append(root_theta+i*theta_inc+pitch_angle)
+      theta_rad.append(theta[i]/180*pi)
+      alpha_rad.append(0)
 
     # Initialize/Clear Lists
     thrust = []

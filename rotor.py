@@ -150,9 +150,9 @@ radial_output.write('\n')
 # theta_rad[i] = (theta[i]/180*pi)
 #print theta
 
-for RPM in RPMs:
+for pitch_angle in pitch_angles:
+  for RPM in RPMs:
 
-  for pitch_angle in pitch_angles:
     # Initial Calcs at RPM
     n = RPM/60               # RPS
     omega = n*2*pi           # angular velocity

@@ -96,8 +96,7 @@ f_theta = scipy.interpolate.interp1d(radii, theta)
 
 radius_interp = np.linspace(radii[0], radii[-1], num=num_elements, endpoint=True)
 chord_interp = f_chord(radius_interp)
-theta_interp = f_theta(radius_interp)
-theta_rad = theta_interp/180.0*pi
+theta_interp_baseline = f_theta(radius_interp)
 
 # Plot shape and save
 plt.plot(radii, chord, 'o')
@@ -109,6 +108,8 @@ plt.ylim(bottom=0)
 plt.savefig('./rotor_shape.png')
 
 for pitch_angle in pitch_angles:
+  theta_interp = theta_interp_baseline + pitch_angle
+  theta_rad = theta_interp/180.0*pi
   for RPM in RPMs:
 
     # Initial Calcs at RPM

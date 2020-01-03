@@ -99,8 +99,14 @@ chord_interp = f_chord(radius_interp)
 theta_interp = f_theta(radius_interp)
 theta_rad = theta_interp/180.0*pi
 
-#plt.plot(radii, chord, 'o', radius_interp, chord_interp)
-#plt.show()
+# Plot shape and save
+plt.plot(radii, chord, 'o')
+plt.plot(radius_interp, chord_interp,'o-',fillstyle='none')
+plt.xlabel('Radius')
+plt.xlim(left=0)
+plt.ylabel('Chord')
+plt.ylim(bottom=0)
+plt.savefig('./rotor_shape.png')
 
 for pitch_angle in pitch_angles:
   for RPM in RPMs:
@@ -125,13 +131,16 @@ for pitch_angle in pitch_angles:
     inboard_airfoil_index = 0
     outboard_airfoil_index = 1 
 
-    r_inc = radius_interp[1]-radius_interp[0] 
     for i in range(num_elements):
       # Guess at initial values of inflow and swirl factor
       # Note: swirl currently isn't used
       v_inflow = 10
       #v_swirl = 0.1
       current_r = radius_interp[i]
+      # increment
+      r_inc = radius_interp[1]-radius_interp[0] 
+      if ( i == 0 or i == num_elements-1):
+        r_inc = r_inc/2.0
       # Check inboard/outboard airfoils
       if(current_r > radii[outboard_airfoil_index]):
         # Advance to next set

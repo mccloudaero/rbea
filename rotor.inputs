@@ -1,8 +1,8 @@
 # Rotor Inputs (metric)
-radii = [0.1143,0.4572]       # 4in,18in
-chord = [0.13716,0.1016]      # 5.4in,4in
-theta = [14.5,6.0]            # theta
-airfoil = ['rc5-10','rc6-08']
+radii = [0.1143,0.1500,0.4572]       # 4in,18in
+chord = [0.13716,0.13716,0.1016]      # 5.4in,4in
+theta = [14.5,14.5,6.0]            # theta
+airfoil = ['rc5-10','rc5-10','rc6-08']
 num_blades = 2.0              # number of blades
 
 # Rotor RPMs to analyze

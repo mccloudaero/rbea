@@ -1,17 +1,9 @@
 # Rotor Inputs (metric)
-diameter = .9144	# meters (36")
-#diameter = 1.016	# meters (40")
-root_radius = 0.1143    # meters (4")
-blades = 2.0		# number of blades
-#root_chord = 0.127	# meters (5")
-root_chord = 0.13716	# meters (5.4")
-tip_chord = 0.1016	# meters (4")
-root_theta = 14.5	# degrees
-tip_theta = 6.0		# degrees
-#airfoil_name = 'rc6-08'
-tip_airfoil_name = 'rc6-08'
-#root_airfoil_name = 'rc4-10'
-root_airfoil_name = 'rc5-10'
+radii = [0.1143,0.4572]       # 4in,18in
+chord = [0.13716,0.1016]      # 5.4in,4in
+theta = [14.5,6.0]            # theta
+airfoil = ['rc5-10','rc6-08']
+num_blades = 2.0              # number of blades
 
 # Rotor RPMs to analyze
 RPMs = [2200,2420,2640,2860,3080,3300,3520,3740,3960]		# rotor speed in RPM
